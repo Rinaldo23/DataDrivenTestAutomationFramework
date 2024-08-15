@@ -3,15 +3,20 @@ package com.rb.utility;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.rb.base.BaseClass;
+import com.rb.constants.FilePaths;
 
 /**
  * Utility class for reading from and writing to Excel files using Apache POI.
@@ -29,7 +34,7 @@ public class ExcelUtility extends BaseClass {
 	 */
 	public String[] readExcelData() throws Exception {
 
-		File excelFile = new File(prop.getProperty("excelFilePath"));
+		File excelFile = new File(FilePaths.EXCEL_FILE_PATH);
 		FileInputStream fis = new FileInputStream(excelFile);
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 		XSSFSheet sheet = workbook.getSheet("userDetails");
@@ -64,7 +69,7 @@ public class ExcelUtility extends BaseClass {
 	 */
 	public void writeExcelData(List<String> data) throws Exception {
 
-		File excelFile = new File(prop.getProperty("excelFilePath"));
+		File excelFile = new File(FilePaths.EXCEL_FILE_PATH);
 		FileInputStream fis = new FileInputStream(excelFile);
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 		XSSFSheet sheet = workbook.getSheet("userDetails");
@@ -90,5 +95,31 @@ public class ExcelUtility extends BaseClass {
 		}
 
 		workbook.close();
+	}
+
+	public List<String[]> readAllExcelData() throws IOException {
+		List<String[]> data = new ArrayList<>();
+
+		File excelFile = new File(FilePaths.EXCEL_FILE_PATH);
+		FileInputStream fis = new FileInputStream(excelFile);
+		XSSFWorkbook workbook = new XSSFWorkbook(fis);
+		XSSFSheet sheet = workbook.getSheet("userDetails");
+
+		Iterator<Row> rowIterator = sheet.iterator();
+
+		// Skip the header row
+		rowIterator.next();
+
+		while (rowIterator.hasNext()) {
+			Row row = rowIterator.next();
+			String email = row.getCell(2).getStringCellValue();
+			String password = row.getCell(5).getStringCellValue();
+			data.add(new String[] { email, password });
+		}
+
+		workbook.close();
+		fis.close();
+
+		return data;
 	}
 }
