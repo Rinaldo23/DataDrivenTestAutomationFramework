@@ -11,50 +11,53 @@ import com.rb.interactions.PageInteraction;
  * Page Object Class for the Login page.
  */
 public class LoginPage extends BaseClass {
-	
-    /**
-     * Initializes elements in the LoginPage using PageFactory.
-     */
-    public LoginPage() {
-        PageFactory.initElements(driver, this);
-    }
-	
-    // Web Elements
 
-    @FindBy(xpath = "//input[@id='userEmail']")
-    private WebElement emailTextBox;
-	
-    @FindBy(xpath = "//input[@id='userPassword']")
-    private WebElement passwordTextBox;
-	
-    @FindBy(xpath = "//input[@id='login']")
-    private WebElement loginBtn;
-	
-    @FindBy(xpath = "//h3[normalize-space()='Automation']")
-    private WebElement logoImage;
-	
-    PageInteraction interaction = new PageInteraction();
-	
-    // Methods
+	/**
+	 * Initializes elements in the LoginPage using PageFactory.
+	 */
+	public LoginPage() {
+		PageFactory.initElements(driver, this);
+	}
 
-    /**
-     * Enters login information into the login form.
-     * 
-     * @param data An array containing email at index 0 and password at index 1
-     */
-    public void EnterLoginInfo(String[] data) {
-        implicitWait(10); // Wait for elements to be interactable
-		
-        interaction.inputText(emailTextBox, data[0]); // Input email
-        interaction.inputText(passwordTextBox, data[1]); // Input password
-        interaction.clickElement(loginBtn); // Click login button
-		
-        // Verify if the logo image is displayed after login
-        if (logoImage.isDisplayed()) {
-            String expectedUrl = "https://rahulshettyacademy.com/client/dashboard/dash";
-            String actualUrl = driver.getCurrentUrl();
-			
-            actualUrl.equals(expectedUrl); // Compare expected and actual URLs
-        }
-    }
+	// Web Elements
+
+	@FindBy(xpath = "//input[@id='userEmail']")
+	private WebElement emailTextBox;
+
+	@FindBy(xpath = "//input[@id='userPassword']")
+	private WebElement passwordTextBox;
+
+	@FindBy(xpath = "//input[@id='login']")
+	private WebElement loginBtn;
+
+	@FindBy(xpath = "//h3[normalize-space()='Automation']")
+	private WebElement logoImage;
+
+	PageInteraction interaction = new PageInteraction();
+
+	// Methods
+
+	public LoginPage enterEmail(String email) {
+		interaction.inputText(emailTextBox, email);
+		return this;
+	}
+
+	public LoginPage enterPassword(String password) {
+		interaction.inputText(passwordTextBox, password);
+		return this;
+	}
+
+	public LoginPage clickOnLoginBtn() {
+		interaction.clickElement(loginBtn);
+		return this;
+	}
+
+	public LoginPage isDashBoardLogoDisplayed() {
+		interaction.isElementDisplayed(logoImage);
+		return this;
+	}
+
+	public void verifySuccesfulLogin() {
+		interaction.verifyPageNavigation("https://rahulshettyacademy.com/client/dashboard/dash");
+	}
 }

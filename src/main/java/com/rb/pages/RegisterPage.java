@@ -13,112 +13,190 @@ import com.rb.utility.DataGenerator;
  */
 public class RegisterPage extends BaseClass {
 
-    /**
-     * Initializes elements in the RegisterPage using PageFactory.
-     */
-    public RegisterPage() {
-        PageFactory.initElements(driver, this);
-    }
+	/**
+	 * Initializes elements in the RegisterPage using PageFactory.
+	 */
+	public RegisterPage() {
+		PageFactory.initElements(driver, this);
+	}
 
-    // Web Elements
+	// Web Elements
 
-    @FindBy(id = "firstName")
-    private WebElement firstNameTextBox;
+	@FindBy(id = "firstName")
+	private WebElement firstNameTextBox;
 
-    @FindBy(css = "input[id='lastName']")
-    private WebElement lastNameTextBox;
+	@FindBy(css = "input[id='lastName']")
+	private WebElement lastNameTextBox;
 
-    @FindBy(xpath = "//input[@type='email']")
-    private WebElement emailTextBox;
+	@FindBy(xpath = "//input[@type='email']")
+	private WebElement emailTextBox;
 
-    @FindBy(xpath = "//input[@type='text' and @id='userMobile']")
-    private WebElement phoneNumberTextBox;
+	@FindBy(xpath = "//input[@type='text' and @id='userMobile']")
+	private WebElement phoneNumberTextBox;
 
-    @FindBy(css = "select[formcontrolname='occupation']")
-    private WebElement occupationDropDown;
+	@FindBy(css = "select[formcontrolname='occupation']")
+	private WebElement occupationDropDown;
 
-    @FindBy(css = "input[value='Male']")
-    private WebElement maleRadioBtn;
+	@FindBy(css = "input[value='Male']")
+	private WebElement maleRadioBtn;
 
-    @FindBy(css = "input[value='Female']")
-    private WebElement femaleRadioBtn;
+	@FindBy(css = "input[value='Female']")
+	private WebElement femaleRadioBtn;
 
-    @FindBy(id = "userPassword")
-    private WebElement passwordTextBox;
+	@FindBy(id = "userPassword")
+	private WebElement passwordTextBox;
 
-    @FindBy(id = "confirmPassword")
-    private WebElement confirmPasswordTextBox;
+	@FindBy(id = "confirmPassword")
+	private WebElement confirmPasswordTextBox;
 
-    @FindBy(xpath = "//input[@type='checkbox']")
-    private WebElement agreeCheckBox;
+	@FindBy(xpath = "//input[@type='checkbox']")
+	private WebElement agreeCheckBox;
 
-    @FindBy(xpath = "//input[@value='Register']")
-    private WebElement RegisterBtn;
+	@FindBy(xpath = "//input[@value='Register']")
+	private WebElement RegisterBtn;
 
-    @FindBy(xpath = "//section/a[contains(text(), 'Register')]")
-    private WebElement NavigateToRegisterPage;
+	@FindBy(xpath = "//section/a[contains(text(), 'Register')]")
+	private WebElement NavigateToRegisterPage;
 
-    @FindBy(xpath = "//h1[@class='headcolor']")
-    private WebElement accountCreationMsg;
+	@FindBy(xpath = "//h1[normalize-space()='Account Created Successfully']")
+	private WebElement accountCreationMsg;
 
-    DataGenerator dg = new DataGenerator();
-    PageInteraction interaction = new PageInteraction();
+	@FindBy(xpath = "//button[normalize-space()='Login']")
+	private WebElement LoginBtn;
 
-    // Methods
+	DataGenerator dg = new DataGenerator();
+	PageInteraction interaction = new PageInteraction();
 
-    /**
-     * Generates random user details and enters them in the registration form.
-     * 
-     * @return An array containing user details: firstName, lastName, password,
-     *         phoneNumber, occupation, email
-     */
-    public String[] EnterRegisterInfo() {
+	// Methods
 
-        String[] userDetails = new String[6];
-        String[] occupationArr = new String[] { "Doctor", "Student", "Engineer", "Scientist" };
+	/**
+	 * Generates random user details and enters them in the registration form.
+	 * 
+	 * @return An array containing user details: firstName, lastName, password,
+	 *         phoneNumber, occupation, email
+	 */
 
-        String firstName, lastName, email, phoneNumber, occupation, password;
+	public String[] EnterRegisterInfo() {
 
-        // Generate random data
-        firstName = dg.generateRandomString();
-        lastName = dg.generateRandomString();
-        email = dg.generateRandomEmail();
-        phoneNumber = dg.generateRandomNumber();
-        occupation = occupationArr[dg.generateRandomNumber(0, 4)];
-        password = dg.generateRandomPassword();
+		String[] userDetails = new String[6];
+		String[] occupationArr = new String[] { "Doctor", "Student", "Engineer", "Scientist" };
 
-        implicitWait(10); // Wait for elements to be interactable
+		String firstName, lastName, email, phoneNumber, occupation, password;
 
-        interaction.clickElement(NavigateToRegisterPage); // Click register link to navigate to registration page
+		// Generate random data
+		firstName = dg.generateRandomString();
+		lastName = dg.generateRandomString();
+		email = dg.generateRandomEmail();
+		phoneNumber = dg.generateRandomNumber();
+		occupation = occupationArr[dg.generateRandomNumber(0, 4)];
+		password = dg.generateRandomPassword();
 
-        // Enter data into registration form
-        interaction.inputText(firstNameTextBox, firstName);
-        interaction.inputText(lastNameTextBox, lastName);
-        interaction.inputText(emailTextBox, email);
-        interaction.inputText(phoneNumberTextBox, phoneNumber);
-        interaction.selectDropdownOptionByVisibleText(occupationDropDown, occupation);
-        interaction.clickElement(maleRadioBtn);
-        interaction.inputText(passwordTextBox, password);
-        interaction.inputText(confirmPasswordTextBox, password);
-        interaction.clickElement(agreeCheckBox);
-        interaction.clickElement(RegisterBtn);
+		implicitWait(10); // Wait for elements to be interactable
 
-        // Check if account creation message is displayed
-        if (interaction.checkIfElementExists(accountCreationMsg)) {
-            String expectedMessage = "Account Created Successfully";
-            String actualMessage = accountCreationMsg.getText().trim();
-            actualMessage.equals(expectedMessage); // Compare expected and actual messages
+		interaction.clickElement(NavigateToRegisterPage); // Click register link to navigate to registration page
 
-            // Store user details in the array
-            userDetails[0] = firstName;
-            userDetails[1] = lastName;
-            userDetails[2] = password;
-            userDetails[3] = phoneNumber;
-            userDetails[4] = occupation;
-            userDetails[5] = email;
-        }
+		// Enter data into registration form
+		interaction.inputText(firstNameTextBox, firstName);
+		interaction.inputText(lastNameTextBox, lastName);
+		interaction.inputText(emailTextBox, email);
+		interaction.inputText(phoneNumberTextBox, phoneNumber);
+		interaction.selectDropdownOptionByVisibleText(occupationDropDown, occupation);
+		interaction.clickElement(maleRadioBtn);
+		interaction.inputText(passwordTextBox, password);
+		interaction.inputText(confirmPasswordTextBox, password);
+		interaction.clickElement(agreeCheckBox);
+		interaction.clickElement(RegisterBtn);
 
-        return userDetails;
-    }
+		// Check if account creation message is displayed
+		if (interaction.checkIfElementExists(accountCreationMsg)) {
+			String expectedMessage = "Account Created Successfully";
+			String actualMessage = accountCreationMsg.getText().trim();
+			actualMessage.equals(expectedMessage); // Compare expected and actual messages
+
+			// Store user details in the array
+			userDetails[0] = firstName;
+			userDetails[1] = lastName;
+			userDetails[2] = password;
+			userDetails[3] = phoneNumber;
+			userDetails[4] = occupation;
+			userDetails[5] = email;
+		}
+
+		return userDetails;
+	}
+
+	/* Click register link to navigate to registration page */
+	public RegisterPage navigateToRegisterPage() {
+		interaction.clickElement(NavigateToRegisterPage);
+		return this;
+	}
+
+	public RegisterPage enterfirstName(String firstName) {
+		interaction.inputText(firstNameTextBox, firstName);
+		return this;
+	}
+
+	public RegisterPage enterLastName(String lastName) {
+		interaction.inputText(lastNameTextBox, lastName);
+		return this;
+	}
+
+	public RegisterPage enterEmail(String email) {
+		interaction.inputText(emailTextBox, email);
+		return this;
+	}
+
+	public RegisterPage enterPhoneNumber(String phoneNumber) {
+		interaction.inputText(phoneNumberTextBox, phoneNumber);
+		return this;
+	}
+
+	public RegisterPage selectOccupation(String occupation) {
+		interaction.selectDropdownOptionByVisibleText(occupationDropDown, occupation);
+		return this;
+	}
+
+	public RegisterPage selectMaleGender() {
+		interaction.clickElement(maleRadioBtn);
+		return this;
+	}
+
+	public RegisterPage enterPassword(String password) {
+		interaction.inputText(passwordTextBox, password);
+		return this;
+	}
+
+	public RegisterPage enterConfirmPassword(String password) {
+		interaction.inputText(confirmPasswordTextBox, password);
+		return this;
+	}
+
+	public RegisterPage agreePolicies() {
+		interaction.clickElement(agreeCheckBox);
+		return this;
+	}
+
+	public RegisterPage clickOnRegisterBtn() {
+		interaction.clickElement(RegisterBtn);
+		return this;
+	}
+
+	public RegisterPage verifySuccesfulRegisteration() {
+		String expectedMessage = "Account Created Successfully";
+		String actualMessage = null;
+
+		if (interaction.checkIfElementExists(accountCreationMsg)) {
+			actualMessage = accountCreationMsg.getText().trim();
+			interaction.compareText(actualMessage, expectedMessage);
+		}
+		return this;
+	}
+
+	public boolean verifyPageNavigatedToLoginPage() {
+		interaction.ExplicitWait(LoginBtn, 10);
+		interaction.clickElement(LoginBtn);
+
+		return interaction.verifyPageNavigation("https://rahulshettyacademy.com/client/auth/login");
+	}
 
 }
