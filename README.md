@@ -22,11 +22,15 @@ DataDrivenTestAutomationFramework/
 │   │           └── rb/
 │   │               ├── base/
 │   │               │   └── BaseClass.java
+│   │               ├── constants/
+│   │               │   └── FilePaths.java
 │   │               ├── interactions/
 │   │               │   └── PageInteraction.java
 │   │               ├── pages/
 │   │               │   ├── LoginPage.java
 │   │               │   └── RegisterPage.java
+│   │               ├── payload/
+│   │               │   └── User.java
 │   │               └── utility/
 │   │                   ├── DataGenerator.java
 │   │                   └── ExcelUtility.java
@@ -35,7 +39,8 @@ DataDrivenTestAutomationFramework/
 │           └── com/
 │               └── rb/
 │                   └── test/
-│                       ├── LoginUserTestCase.java
+│                       ├── LoginUserTestCase.java 
+│                       ├── LoginWithMultipleUsersTest.java
 │                       └── RegisterUserTestCase.java
 └── src/
     └── test/
@@ -55,6 +60,7 @@ DataDrivenTestAutomationFramework/
 - Selenium WebDriver
 - Apache POI (for Excel interaction)
 - ChromeDriver
+- JUnit
 
 ### Installation
 
@@ -92,7 +98,11 @@ DataDrivenTestAutomationFramework/
 
 This test case reads login credentials from an Excel file and attempts to log into the application. If the login is successful, the test will verify the current URL to ensure the user has navigated to the dashboard page.
 
-### 2. Register User Test Case
+### 2. Login with Multiple Users using Parameterized Annotation Test Case
+
+This test case reads login credentials from an Excel file and attempts to log into the application. If the login is successful, the test will verify the dashboard logo is displayed to confirm that the user has successfully navigated to the dashboard page.
+
+### 3. Register User Test Case
 
 This test case generates random user data, fills the registration form, and writes the user details to an Excel file if the registration is successful.
 
