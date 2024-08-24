@@ -1,9 +1,9 @@
-name: Run Login Test With Multiple Users
+name: Run Register User Test 
 
 on: workflow_dispatch
 
 jobs:
-  run-login-test-with-multiple-user:
+  run-register-user-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,4 +23,4 @@ jobs:
         run: mvn -v
 
       - name: Run the Web Tests
-        run: mvn clean test -Dtest=LoginWithMultipleUsersTest
+        run: mvn clean test -Dtest=RegisterUserTest
