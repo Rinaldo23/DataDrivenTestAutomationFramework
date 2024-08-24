@@ -20,7 +20,7 @@ jobs:
         run: sudo apt-get install maven  # Installs Maven directly
 
       - name: Show Maven Version
-        run: mvn -V
+        run: mvn -v
 
       - name: Run the Web Tests
         run: mvn clean test -Dtest=LoginUserTest
