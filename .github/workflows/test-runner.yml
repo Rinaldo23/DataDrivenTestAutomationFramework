@@ -10,17 +10,18 @@ jobs:
       - name: Pull the project into runner 
         uses: actions/checkout@v4
       
-      - name: Set-up Java (optional)
-        uses: actions/setup-java@v4
+      - name: Set up Java
+        uses: actions/setup-java@v3
         with:
-            distribution: 'temurin'
-            java-version: '21'
+          distribution: 'temurin'
+          java-version: '17'  # Consider using a stable version like 11 or 17
     
-      - name: Setup Maven Action
-        uses: s4u/setup-maven-action@3.9.6
+      - name: Setup Maven
+        uses: s4u/setup-maven@v3  # Corrected Maven setup action
 
-      - run: mvn -V
+      - name: Show Maven Version
+        run: mvn -V  # Added a descriptive name for the command
 
       - name: Run the Web Tests
         run: |
-         mvn clean test -Dtest=LoginUserTest
+          mvn clean test -Dtest=LoginUserTest
