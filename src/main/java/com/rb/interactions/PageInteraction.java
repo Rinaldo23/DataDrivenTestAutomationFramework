@@ -120,7 +120,7 @@ public class PageInteraction extends BaseClass {
 	public boolean isElementDisplayed(WebElement element) {
 		boolean flag = false;
 		if (element != null) {
-			ExplicitWait(element, 10);
+			ExplicitWait(element, 30);
 			assertEquals(true, element.isDisplayed());
 			flag = true;
 		}

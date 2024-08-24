@@ -193,7 +193,7 @@ public class RegisterPage extends BaseClass {
 	}
 
 	public boolean verifyPageNavigatedToLoginPage() {
-		interaction.ExplicitWait(LoginBtn, 10);
+		interaction.ExplicitWait(LoginBtn, 30);
 		interaction.clickElement(LoginBtn);
 
 		return interaction.verifyPageNavigation("https://rahulshettyacademy.com/client/auth/login");
