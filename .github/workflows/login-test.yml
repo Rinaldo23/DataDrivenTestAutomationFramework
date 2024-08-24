@@ -1,4 +1,4 @@
-name: Data Driven Tests WorkFlow
+name: Run Login Test 
 
 on: workflow_dispatch
 
