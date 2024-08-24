@@ -9,6 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -43,9 +44,18 @@ public class BaseClass {
 	public void LaunchApp() throws Exception {
 		loadConfig(); // Load configuration from config.properties
 
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless"); // Run Chrome in headless mode
+		options.addArguments("window-size=1920,1080");
+		options.addArguments("--disable-gpu");
+		options.addArguments("--disable-software-rasterizer");
+		options.addArguments("--disable-dev-shm-usage");
+		options.addArguments("--no-sandbox");
+
+
 		// Setup ChromeDriver using WebDriverManager
 		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
+		driver = new ChromeDriver(options);
 
 		// Maximize the browser window
 		driver.manage().window().maximize();
@@ -74,5 +84,5 @@ public class BaseClass {
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
 		}
 	}
-	
+
 }
