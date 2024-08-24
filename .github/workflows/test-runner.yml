@@ -15,13 +15,12 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'  # Consider using a stable version like 11 or 17
-    
-      - name: Setup Maven
-        uses: s4u/setup-maven@v3  # Corrected Maven setup action
+
+      - name: Install Maven
+        run: sudo apt-get install maven  # Installs Maven directly
 
       - name: Show Maven Version
-        run: mvn -V  # Added a descriptive name for the command
+        run: mvn -V
 
       - name: Run the Web Tests
-        run: |
-          mvn clean test -Dtest=LoginUserTest
+        run: mvn clean test -Dtest=LoginUserTest
