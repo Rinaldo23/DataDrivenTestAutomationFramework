@@ -7,6 +7,19 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Data Driven Testing</name>
 	<description>Data Driven testing using Excel and MySQL.</description>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.4.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
 	<dependencies>
 
 		<dependency>

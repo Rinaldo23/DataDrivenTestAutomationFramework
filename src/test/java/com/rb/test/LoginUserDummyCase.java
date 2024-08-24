@@ -10,7 +10,7 @@ import com.rb.utility.ExcelUtility;
 /**
  * Test case to perform user login using data from an Excel sheet.
  */
-public class LoginUserTestCase extends BaseClass {
+public class LoginUserDummyCase extends BaseClass {
 
 	private LoginPage lp;
 	private ExcelUtility eu;

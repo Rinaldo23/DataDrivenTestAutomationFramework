@@ -1,0 +1,24 @@
+name: Data Driven Tests WorkFlow
+
+on: workflow_dispatch
+
+jobs:
+  run-data-driven-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull the project into runner 
+        uses: actions/checkout@v4
+      
+      - name: Set-up Java (optional)
+        uses: actions/setup-java@v4
+        with:
+            distribution: 'temurin'
+            java-version: '21'
+
+      - name: Build with Maven
+        run: mvn clean install
+
+      - name: Run the Web Tests
+        run: |
+            mvn clean test

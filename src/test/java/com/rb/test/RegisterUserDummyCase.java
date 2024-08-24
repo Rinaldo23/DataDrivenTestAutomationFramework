@@ -16,7 +16,7 @@ import com.rb.utility.ExcelUtility;
  * Test case for registering a user using randomly generated data and writing it
  * to an Excel sheet.
  */
-public class RegisterUserTestCase extends BaseClass {
+public class RegisterUserDummyCase extends BaseClass {
 
 	private RegisterPage rp;
 	private ExcelUtility eu;
