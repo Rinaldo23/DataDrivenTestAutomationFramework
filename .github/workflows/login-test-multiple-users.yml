@@ -1,0 +1,26 @@
+name: Run Login Test With Multiple Users
+
+on: workflow_dispatch
+
+jobs:
+  run-login-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull the project into runner 
+        uses: actions/checkout@v4
+      
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'  # Consider using a stable version like 11 or 17
+
+      - name: Install Maven
+        run: sudo apt-get install maven  # Installs Maven directly
+
+      - name: Show Maven Version
+        run: mvn -v
+
+      - name: Run the Web Tests
+        run: mvn clean test -Dtest=LoginWithMultipleUsersTest
