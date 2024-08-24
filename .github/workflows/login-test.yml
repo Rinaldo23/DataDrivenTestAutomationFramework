@@ -22,5 +22,15 @@ jobs:
       - name: Show Maven Version
         run: mvn -v
 
+      - name: Restore Maven cache
+        uses: skjolber/maven-cache-github-action@v1
+        with:
+          step: restore
+
       - name: Run the Web Tests
         run: mvn clean test -Dtest=LoginUserTest
+
+      - name: Save Maven cache
+        uses: skjolber/maven-cache-github-action@v1
+        with:
+          step: save
