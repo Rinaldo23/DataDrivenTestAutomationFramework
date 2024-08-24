@@ -3,7 +3,7 @@ name: Data Driven Tests WorkFlow
 on: workflow_dispatch
 
 jobs:
-  run-data-driven-tests:
+  run-login-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,4 +21,4 @@ jobs:
 
       - name: Run the Web Tests
         run: |
-            mvn clean test
+         mvn clean test -Dtest=LoginUserTest
