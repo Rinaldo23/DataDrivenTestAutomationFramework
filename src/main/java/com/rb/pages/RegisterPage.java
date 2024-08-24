@@ -184,7 +184,7 @@ public class RegisterPage extends BaseClass {
 	public RegisterPage verifySuccesfulRegisteration() {
 		String expectedMessage = "Account Created Successfully";
 		String actualMessage = null;
-
+		interaction.ExplicitWait(accountCreationMsg, 60);
 		if (interaction.checkIfElementExists(accountCreationMsg)) {
 			actualMessage = accountCreationMsg.getText().trim();
 			interaction.compareText(actualMessage, expectedMessage);
