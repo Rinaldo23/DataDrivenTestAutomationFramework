@@ -17,7 +17,7 @@ jobs:
             java-version: '21'
     
       - name: Setup Maven Action
-        uses: s4u/setup-maven-action@< version >
+        uses: s4u/setup-maven-action@3.9.6
 
       - run: mvn -V
 
